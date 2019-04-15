@@ -118,6 +118,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home{
 	.search-bar{
 		height: 64px;
 		line-height: 64px;
@@ -204,4 +205,5 @@ export default {
 			margin-top: 10px;
 		}
 	}
+}	
 </style>

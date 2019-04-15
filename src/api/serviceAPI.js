@@ -4,7 +4,8 @@ const LOCAL_URL = "http://localhost:3000/"
 const URL = {
 	getHomeData: BASE_URL,
 	registerUser: `${LOCAL_URL}user/register`, //注册接口
-	loginUser: `${LOCAL_URL}user/login` //登陆接口
+	loginUser: `${LOCAL_URL}user/login`, //登陆接口
+	getGoodsInfo: `${LOCAL_URL}goods/getGoodsDetailInfo`
 }
 
 export default URL

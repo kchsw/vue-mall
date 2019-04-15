@@ -1,5 +1,5 @@
 <template>
-	<div class="goods-info">
+	<div class="goods-info" @click="goGoodsPage">
         <div class="goods-image">
             <img v-lazy="goods.image" width="90%" />
         </div>
@@ -17,11 +17,16 @@
 				default: () => ({})
 			}
 		},
-		filters: {
-	  		formatMoney(money = 0){
-	  			return money.toFixed(2)
-	  		}
-	  	}	
+		methods: {
+			goGoodsPage(){
+				this.$router.push({ name: 'goods', query: { goodsId: this.goods.goodsId } })
+			}
+		}
+		// filters: {
+	 //  		formatMoney(money = 0){
+	 //  			return money.toFixed(2)
+	 //  		}
+	 //  	}	
 
 	}
 </script>
