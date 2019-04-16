@@ -2,7 +2,7 @@
 	<section>
 		<swiper :options="options" :not-next-tick="options.notNextTick">
 			<swiper-slide class="swiper-slide" v-for="item in items" :key="item.goodsId">
-				<div class="recommend-item">
+				<div class="recommend-item" @click="goGoodsPage(item.goodsId)">
 					<img :src="item.image" width="100%" />
 	                <p>{{item.goodsName}}</p>
 	                <p>￥{{item.price | formatMoney}} <span class="line">(￥{{item.mallPrice | formatMoney}})</span></p>
@@ -41,6 +41,11 @@ export default {
 			default: []
 		}
 	},
+	methods: {
+		goGoodsPage(goodsId){
+			this.$router.push({ name: 'goods', query: { goodsId: goodsId } })
+		}
+	}
 }
 </script>
 

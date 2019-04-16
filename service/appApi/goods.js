@@ -1,4 +1,4 @@
-const Koa = require('koa')
+ const Koa = require('koa')
 const app = new Koa()
 const Router = require ('koa-router')
 let router = new Router()
@@ -66,6 +66,7 @@ router.get('/insertAllCategorySub', async (ctx) => {
 	ctx.body = "开始导入数据"
 })
 
+//获取商品详情
 router.get('/getGoodsDetailInfo', async (ctx) => {
 	// let { goodsId } = ctx.request.body
 	// ctx.body = {
@@ -87,6 +88,86 @@ router.get('/getGoodsDetailInfo', async (ctx) => {
 			message: error
 		}
 	}	
+})
+
+//获取大类
+router.get('/getCategoryList', async (ctx) => {
+	try{
+		const Category = mongoose.model('Category')
+		let result = await Category.find().exec()
+		ctx.body = {
+			code: 200,
+			message: result
+		}
+	}catch(error){
+		ctx.body = {
+			code: 500,
+			message: error
+		}
+	}
+})
+
+//获取小类
+router.get('/getCategorySubList', async (ctx) => {
+	
+	try{
+		const { categoryId } = ctx.request.query
+		const CategorySub = mongoose.model('CategorySub')
+		let result = await CategorySub.find({ MALL_CATEGORY_ID: categoryId}).exec()
+		ctx.body = {
+			code: 200,
+			message: result
+			// message: categoryId
+		}
+	}catch(error){
+		console.log(error)
+		ctx.body = {
+			code: 500,
+			message: error
+		}
+	}
+})
+
+//通过分类获取商品详情
+router.get('/getGoodsByCategorySubId', async (ctx) => {
+	
+	try{
+		// const categorySubId = "2c9f6c946077476a0160781eb392000d"
+		const { categorySubId } = ctx.request.query
+		const Goods = mongoose.model('Goods')
+		let result = await Goods.find({ SUB_ID: categorySubId}).exec()
+		ctx.body = {
+			code: 200,
+			message: result
+		}
+	}catch(error){
+		console.log(error)
+		ctx.body = {
+			code: 500,
+			message: error
+		}
+	}
+})
+//分页获取
+router.get('/getGoodsByCategorySubIdLimit', async (ctx) => {
+	
+	try{
+		const { categorySubId, page } = ctx.request.query
+		const num = 10
+		let start = (page - 1) * num 
+		const Goods = mongoose.model('Goods')
+		let result = await Goods.find({ SUB_ID: categorySubId}).skip(start).limit(num).exec()
+		ctx.body = {
+			code: 200,
+			message: result
+		}
+	}catch(error){
+		console.log(error)
+		ctx.body = {
+			code: 500,
+			message: error
+		}
+	}
 })
 
 module.exports = router

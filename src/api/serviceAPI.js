@@ -5,7 +5,10 @@ const URL = {
 	getHomeData: BASE_URL,
 	registerUser: `${LOCAL_URL}user/register`, //注册接口
 	loginUser: `${LOCAL_URL}user/login`, //登陆接口
-	getGoodsInfo: `${LOCAL_URL}goods/getGoodsDetailInfo`
+	getGoodsInfo: `${LOCAL_URL}goods/getGoodsDetailInfo`,
+	getCategory: `${LOCAL_URL}goods/getCategoryList`,
+	getCategorySub: `${LOCAL_URL}goods/getCategorySubList`,
+	getGoodsList: `${LOCAL_URL}goods/getGoodsByCategorySubIdLimit`
 }
 
 export default URL
