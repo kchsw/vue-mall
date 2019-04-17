@@ -13,14 +13,14 @@
 				<img :src="goodsInfo.IMAGE1" alt="" width="100%">
 			</div>
 			<div class="goods-desc">
-				<p><span class="goods-price">￥{{goodsInfo.PRESENT_PRICE | formatMoney}}</span></p>
+				<p><span class="goods-price">￥{{goodsInfo.PRESENT_PRICE | formatMoney}}</span>&nbsp<span class="line">(￥{{goodsInfo.ORI_PRICE | formatMoney}})</span></p>
 				<p>{{goodsInfo.NAME}}</p>
 				<div class="goods-msg"><span>快递: 免运费</span><span>月销: 232</span><span>产地:上海</span></div>
 			</div>
 			<!-- <div class="goods-tab">
 				
 			</div> -->
-			<van-tabs v-model="active" sticky swipeable class="goods-tab" :animated="true" :offset-top="50"> 
+			<van-tabs v-model="active" sticky swipeable class="goods-tab" :animated="true"> 
 			    <van-tab title="详情">
 			    	<div v-html="goodsInfo.DETAIL" class="detail-img">
 					</div>
@@ -39,7 +39,8 @@
 			  text="购物车"			    
 			/>
 			<van-goods-action-big-btn
-			  text="加入购物车"			   
+			  text="加入购物车"
+			  @click="addToCart"			   
 			/>
 			<van-goods-action-big-btn
 			  primary
@@ -50,6 +51,7 @@
 </template>
 
 <script>
+	import { formatGoods } from "../api/goods.js"
 	import URL from "../api/serviceAPI"
 	import { Toast } from 'vant';
 	export default {
@@ -75,12 +77,27 @@
 				}catch(error){
 
 				}
-			}
+			},
+			addToCart(){
+				let cartList = localStorage.getItem('CARTLIST') ? JSON.parse(localStorage.getItem('CARTLIST')) : []
+				let goods = cartList.find(item => item.goodsId == this.goodsInfo.ID)
+				if(goods){
+					goods.count += 1
+					Toast.success('添加成功');
+				}else{
+				let goods = formatGoods(this.goodsInfo)	
+					goods.count = 1
+					cartList.push(goods)
+				}
+				localStorage.setItem('CARTLIST', JSON.stringify(cartList))
+				this.$router.push({ name: 'cart' })
+			} 
 		},
 		created() {
 			this.goodsId = this.$route.query.goodsId
 			this.getGoodsInfo()
-		}
+		},
+		
 	}
 </script>
 
@@ -116,6 +133,11 @@
 				.goods-price{
 					color: red;
 					font-size: 30px;
+				}
+				.line{
+					text-decoration-line: line-through;
+					color: #ccc;
+					vertical-align: top;
 				}
 			}
 			.goods-msg{

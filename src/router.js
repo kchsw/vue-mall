@@ -5,6 +5,7 @@ import Register from './views/Register'
 import Login from './views/Login'
 import Goods from './views/Goods'
 import Category from './views/Category'
+import Cart from './views/Cart'
 Vue.use(Router)
 
 export default new Router({
@@ -35,6 +36,11 @@ export default new Router({
       path: '/category',
       name: 'category',
       component: Category
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart
     }
     // {
     //   path: '/about',

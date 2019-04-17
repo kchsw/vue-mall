@@ -181,6 +181,14 @@ export default {
 			}
 		}
 	}
+	.advertbanner{
+		margin: 10px 0;
+		height: 50px;
+		overflow: hidden;
+		img{
+			display: block;
+		}
+	}
 	.recommend{
 		background-color: #fff;
 		.recommend-title{

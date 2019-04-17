@@ -4,12 +4,16 @@
             <img v-lazy="goods.image" width="90%" />
         </div>
         <div class="goods-name">{{goods.name}}</div>
-        <div class="goods-price">￥{{ goods.price | formatMoney }}</div>
+        <div class="goods-price">￥{{ goods.price | formatMoney }}&nbsp<span class="line" v-if="goods.oriprice">(￥{{goods.oriprice | formatMoney}})</span></div>
 	</div>
 </template>
 
 <script>
 	export default {
+		data() {
+			return {			
+			}
+		},
 		name: 'goodsInfo',
 		props: {
 			goods: {
@@ -39,10 +43,16 @@
 		background-color: #fff;
 		padding: 10px;
 		.goods-name{
-
 			overflow: hidden;
 	        text-overflow: ellipsis;
 	        white-space:nowrap; 
+		}
+		.goods-price{
+			.line{
+				text-decoration-line: line-through;
+				color: #ccc;
+				vertical-align: top;
+			}
 		}
 	}
 </style>

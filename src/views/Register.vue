@@ -136,6 +136,9 @@
 		/deep/ .van-cell{
 			line-height: 60px;
 			font-size: 22px;
+			.van-field__body{
+				height: 60px;
+			}
 			.van-field__error-message{
 				font-size: 20px;
 			}

@@ -26,17 +26,20 @@
 				   </van-col>
 				   <van-col class="col-panel col-right" span="18">
 				   		<!-- <van-loading color="white" /> -->
-				   		<van-list
-						  v-model="loading"
-						  :finished="finished"
-						  finished-text="没有更多了"
-						>
-							<van-row gutter="10">
-								<van-col span="12" v-for="item in goodsList" :key="item.goodsId">
-									<goods-info :goods="item"></goods-info>
-								</van-col>
-							</van-row>
-						</van-list>
+				   		<van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+					   		<van-list
+							  v-model="loading"
+							  :finished="finished"
+							  finished-text="没有更多了"
+							  @load="onLoad"
+							>
+								<van-row gutter="10">
+									<van-col span="12" v-for="item in goodsList" :key="item.goodsId">
+										<goods-info :goods="item"></goods-info>
+									</van-col>
+								</van-row>
+							</van-list>
+						</van-pull-refresh>
 				   </van-col>			
 				</van-row>
 		    </van-tab>
@@ -45,9 +48,10 @@
 </template>
 
 <script>
+	import { Toast } from 'vant';
 	import URL from "../api/serviceAPI"
 	import GoodsInfo from "../components/GoodsInfo"
-	import formatGoods from "../api/goods.js"
+	import { formatGoodsList } from "../api/goods.js"
 	export default {
 		name: 'category',
 		data() {
@@ -58,9 +62,11 @@
 				categorySub: [],
 				goodsList: [],
 				loading: false,
-      			finished: false,
+      			finished: true,
       			page: 1,
-      			categorySubId: ''
+      			categorySubId: '',
+      			isLoading: false,
+      			
 			}
 		},
 		components: {
@@ -89,9 +95,9 @@
 					if(result.data.code == 200 && result.data.message){
 						this.categorySub = result.data.message
 						this.currentIndex = 0
-						this.page = 1
-						this.goodsList = []
-						this.finished = false
+						// this.page = 1
+						// this.goodsList = []
+						// this.finished = false
 						this.categorySubId = this.categorySub[0].ID
 						this.getGoodsBySubId(this.categorySub[0].ID)
 				    }else{
@@ -103,16 +109,15 @@
 			},
 			async getGoodsBySubId(id){
 				try{
-					const result = await this.$http.get(URL.getGoodsList, { params: { categorySubId: id, page: this.page}})
+					const result = await this.$http.get(URL.getGoodsList, { params: { categorySubId: id}})
 					if(result.data.code == 200 && result.data.message){
 						// this.goodsList = result.data.message
-						this.goodsList = this.goodsList.concat(formatGoods(result.data.message))
-						console.log('11')
-						
-				    }else{
-				    	this.finished = true
+						this.goodsList = formatGoodsList(result.data.message)		
+				    }else{		
+				    	// this.finished = true
 				    	Toast.success("服务器错误，获取数据失败")
 				    }
+				    // this.loading = false	
 				}catch(error){
 					console.log(error)
 				}
@@ -120,13 +125,13 @@
 			selectCategorySub(index, id){
 				this.currentIndex = index
 				this.categorySubId = id
-				this.page = 1
-				this.goodsList = []
-				this.finished = false
-				// this.getGoodsBySubId(id)
+				// this.page = 1
+				// this.goodsList = []
+				// this.finished = false
+				this.getGoodsBySubId(id)
 			},
 			onLoad(){
-				this.loading = false
+				// this.loading = false
 				// setTimeout(() => {
 				// 	this.loading = false
 				// 	this.page++
@@ -138,6 +143,14 @@
 				// this.loading = false		
 				// console.log('11')
 
+			},
+			onRefresh(){
+				this.goodsList = []
+				setTimeout(() => {
+			        this.$toast('刷新成功')
+			        this.getGoodsBySubId(this.categorySubId)
+			        this.isLoading = false
+			    }, 500);
 			}
 
 		},
@@ -184,7 +197,7 @@
 					.category-list{
 						height: 100%;
 						box-sizing: border-box;
-						border-right: 1px solid #fff;
+						border-right: 1px solid #ddd;
 						font-size: 0;
 						.category-item{
 							font-size: 24px;

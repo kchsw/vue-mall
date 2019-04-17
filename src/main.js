@@ -7,8 +7,8 @@ import axios from 'axios'
 import filter from './api/filter.js'
 import 'normalize.css'
 
-import { Loading, Tab, Tabs, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, Button, Row, Col, Icon, Swipe, SwipeItem, Lazyload, List, Field, NavBar, CellGroup, Toast } from 'vant'
-Vue.use(Loading).use(Tab).use(Tabs).use(GoodsAction).use(GoodsActionBigBtn).use(GoodsActionMiniBtn).use(Button).use(Row).use(Col).use(Icon).use(Swipe).use(SwipeItem).use(Lazyload).use(List).use(Field).use(NavBar).use(CellGroup).use(Toast)
+import { Dialog, Stepper, PullRefresh, Loading, Tab, Tabs, GoodsAction, GoodsActionBigBtn, GoodsActionMiniBtn, Button, Row, Col, Icon, Swipe, SwipeItem, Lazyload, List, Field, NavBar, CellGroup, Toast } from 'vant'
+Vue.use(Dialog).use(Stepper).use(PullRefresh).use(Loading).use(Tab).use(Tabs).use(GoodsAction).use(GoodsActionBigBtn).use(GoodsActionMiniBtn).use(Button).use(Row).use(Col).use(Icon).use(Swipe).use(SwipeItem).use(Lazyload, { error: require('./assets/errorimg.png') }).use(List).use(Field).use(NavBar).use(CellGroup).use(Toast)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios

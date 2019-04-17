@@ -8,7 +8,7 @@ const URL = {
 	getGoodsInfo: `${LOCAL_URL}goods/getGoodsDetailInfo`,
 	getCategory: `${LOCAL_URL}goods/getCategoryList`,
 	getCategorySub: `${LOCAL_URL}goods/getCategorySubList`,
-	getGoodsList: `${LOCAL_URL}goods/getGoodsByCategorySubIdLimit`
+	getGoodsList: `${LOCAL_URL}goods/getGoodsByCategorySubId`
 }
 
 export default URL
