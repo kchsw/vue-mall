@@ -6,6 +6,8 @@ import Login from './views/Login'
 import Goods from './views/Goods'
 import Category from './views/Category'
 import Cart from './views/Cart'
+import Main from './views/Main'
+import Mine from './views/Mine'
 Vue.use(Router)
 
 export default new Router({
@@ -14,8 +16,36 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'main',
+      component: Main,
+      redirect: '/home',
+      children: [
+        {
+          path: 'home',
+          name: 'home',
+          component: Home
+        },
+        {
+          path: 'category',
+          name: 'category',
+          component: Category
+        },
+        {
+          path: 'cart',
+          name: 'cart',
+          component: Cart
+        },
+        {
+          path: 'mine',
+          name: 'mine',
+          component: Mine
+        }       
+      ]
+    },
+    {
+      path: '/goods',
+      name: 'goods',
+      component: Goods
     },
     {
       path: '/register',
@@ -27,21 +57,6 @@ export default new Router({
       name: 'login',
       component: Login
     },
-    {
-      path: '/goods',
-      name: 'goods',
-      component: Goods
-    },
-    {
-      path: '/category',
-      name: 'category',
-      component: Category
-    },
-    {
-      path: '/cart',
-      name: 'cart',
-      component: Cart
-    }
     // {
     //   path: '/about',
     //   name: 'about',

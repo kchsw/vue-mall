@@ -1,6 +1,6 @@
 <template>
 	<div class="floor">
-		<div class="floor-title"><span class="floor-number"></span>{{floorTitle}}</div>
+		<div class="floor-title"><span class="floor-number"></span>- {{floorTitle}} -</div>
 		<div class="floor-image">
 			<div class="floor-anomaly">
                 <div class="floor-left"><img :src="floorData_0.image" width="100%" /></div>

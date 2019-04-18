@@ -18,7 +18,7 @@
 					<p class="car-price">￥{{item.price | formatMoney }}<span class="count">x{{item.count}}</span></p>
 					<div class="item-control">
 						<van-stepper v-model="item.count" min="0" @change="saveToLocal" @minus="removeItem(item)"/>
-						<span class="item-total">总价:￥{{item.price*item.count | formatMoney}}</span>
+						<span class="item-total">总计:<span class="total">￥{{item.price*item.count | formatMoney}}</span></span>
 					</div>
 				</div>
 			</div>
@@ -87,7 +87,7 @@
 
 <style lang="scss" scoped>
 .cart{
-	margin: 60px 0 90px 0;
+	margin: 60px 0 160px 0;
 	.nav-bar{
 		height: 50px;
 		line-height: 50px;
@@ -145,9 +145,13 @@
 					align-items: center;
     				justify-content: space-between;
 					.item-total{
-						font-size: 22px;
-						color: red;
-						font-weight: bold;
+						font-size: 20px;
+						color: #666;
+						.total{
+							font-size: 22px;
+							color: red;
+							font-weight: bold;
+						}
 					}
 				}
 			}
@@ -162,7 +166,7 @@
 			overflow: hidden;
 			position: fixed;
 			left: 0;
-			bottom: 0;
+			bottom: 70px;
 			.van-button{
 				float: right;
 				height: 60px;

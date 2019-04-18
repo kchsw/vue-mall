@@ -8,7 +8,7 @@
 		  @click-left="goBack"
 		  fixed
 		/>
-		<van-tabs class="category-tab" v-model="active" sticky swipeable :animated="true" :offset-top="50"
+		<van-tabs class="category-tab" v-model="active" :animated="true" 
 		>
 		    <van-tab v-for="item in category" :key="item.ID">
 		    	<div slot="title" @click="getCategorySub(item.ID)">
@@ -156,7 +156,10 @@
 		},
 		created(){
 			this.getCategory()
-			// this.getCategorySub(1)
+				// if(this.$route.query){
+				// 	this.active = this.$route.query.index
+				// 	this.getCategorySub(this.$route.query.categoryId)
+				// }	
 		},
 		// watch: {
 		// 	categorySub(){
@@ -168,6 +171,7 @@
 
 <style lang="scss" scoped>
 	.category{
+		margin-top: 50px;
 		.nav-bar{
 			height: 50px;
 			line-height: 50px;
@@ -179,7 +183,6 @@
 			}
 		}
 		.category-tab{
-			margin-top: 50px;
 			/deep/ .van-tabs__wrap{
 				height: 46px;
 			}
@@ -189,7 +192,7 @@
 			.category-row{
 				// background: red;
 				.col-panel{
-					height: calc(100vh - 96px);
+					height: calc(100vh - 166px);
 					overflow: auto;
 					&::-webkit-scrollbar{
 						display:none;

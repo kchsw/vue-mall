@@ -21,7 +21,7 @@
 			</van-swipe>
     	</div>
     	<div class="class-bar">
-    		<div v-for="item in category" class="category-item">
+    		<div v-for="(item, index) in category" class="category-item" @click="selectCategory(index, item.mallCategoryId)">
     			<img :src="item.image" alt="">
     			<span>{{item.mallCategoryName}}</span>
     		</div>
@@ -107,8 +107,11 @@ export default {
   				// const { data: { data: homeData } } = result
   				// console.log(homeData)
   			}catch(error){
-
+  				console.log(error)
   			}
+  		},
+  		selectCategory(index, id){
+  			this.$router.push({ name: 'category', query: { index, categoryId: id } })
   		}
   	},
   	created(){

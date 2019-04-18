@@ -36,7 +36,8 @@
 			/>
 			<van-goods-action-mini-btn
 			  icon="cart-o"
-			  text="购物车"			    
+			  text="购物车"
+			  @click="toCart"			    
 			/>
 			<van-goods-action-big-btn
 			  text="加入购物车"
@@ -88,8 +89,12 @@
 				let goods = formatGoods(this.goodsInfo)	
 					goods.count = 1
 					cartList.push(goods)
+					Toast.success('添加成功');
 				}
 				localStorage.setItem('CARTLIST', JSON.stringify(cartList))
+				
+			},
+			toCart(){
 				this.$router.push({ name: 'cart' })
 			} 
 		},
