@@ -1,6 +1,9 @@
 <template>
 	<div class="floor">
-		<div class="floor-title"><span class="floor-number"></span>- {{floorTitle}} -</div>
+		<div class="floor-title">
+			<span class="floor-number"><slot></slot>F</span>
+			<span>- {{floorData.name}} -</span>
+		</div>
 		<div class="floor-image">
 			<div class="floor-anomaly">
                 <div class="floor-left"><img :src="floorData_0.image" width="100%" /></div>
@@ -29,21 +32,15 @@
 			}
 		},
 		props: {
-			floorTitle: {
-				type: String,
-				default: '商品'
-			},
 			floorData: {
-				type: Array,
-				default: () => []
-			}
+				type: Object,
+				default: () => {}
+			},
 		},
-		watch: {
-			floorData(){
-				this.floorData_0 = this.floorData[0]
-				this.floorData_1 = this.floorData.slice(1,3)
-				this.floorData_2 = this.floorData.slice(3)
-			}
+		created(){
+			this.floorData_0 = this.floorData.floor[0]
+			this.floorData_1 = this.floorData.floor.slice(1,3)
+			this.floorData_2 = this.floorData.floor.slice(3)
 		}
 	}
 </script>
@@ -57,6 +54,17 @@
 		text-align: center;
 		font-size: 26px;
 		color: #c84d2c;
+		.floor-number{
+			display: inline-block;
+			width: 38px;
+			height: 38px;
+			line-height: 40px;
+			color: #fff;
+			font-size: 20px;
+			background: #e5017d;
+			border-radius: 50%;
+			margin-right: 5px;
+		}
 	}
 	.floor-image{
 		margin-top: 10px;

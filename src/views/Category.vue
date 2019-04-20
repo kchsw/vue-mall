@@ -56,7 +56,7 @@
 		name: 'category',
 		data() {
 			return {
-				active: 0,
+				active: undefined,
 				currentIndex: 0,
 				category: [],
 				categorySub: [],
@@ -76,12 +76,12 @@
 			goBack(){
 				this.$router.go(-1)
 			},
-			async getCategory(){
+			async getCategory(id){
 				try{
 					const result = await this.$http.get(URL.getCategory)
 					if(result.data.code == 200 && result.data.message){
 						this.category = result.data.message
-						this.getCategorySub(this.category[0].ID)
+						this.getCategorySub(id || this.category[0].ID)
 				    }else{
 				    	Toast.success("服务器错误，获取数据失败")
 				    }
@@ -155,17 +155,15 @@
 
 		},
 		created(){
-			this.getCategory()
-				// if(this.$route.query){
-				// 	this.active = this.$route.query.index
-				// 	this.getCategorySub(this.$route.query.categoryId)
-				// }	
+			this.active = this.$route.query.index || 0
+			this.getCategory(this.$route.query.categoryId)
 		},
-		// watch: {
-		// 	categorySub(){
-		// 		this.getGoodsBySubId(this.categorySub[0].ID)
-		// 	}
-		// }
+		watch: {
+			$route(){
+				this.active = this.$route.query.index || 0
+				this.getCategory(this.$route.query.categoryId)
+			}
+		}
 	}
 </script>
 

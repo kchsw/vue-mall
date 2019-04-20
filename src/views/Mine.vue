@@ -11,8 +11,9 @@
 		<div class="user-info">
 			<div class="user-avatar">
 				<img :src="avatar" alt="">
-				<p class="user-name">未登录,请登陆或注册</p>
-				<div class="user-login">
+				<p class="user-name" v-if="!userinfo">未登录,请登陆或注册</p>
+				<p class="user-name" v-else>{{userinfo.userName}}</p>
+				<div class="user-login" v-if="!userinfo">
 					<router-link to="/login" tag="div" class="user-link">登陆</router-link>
 					<router-link to="/register" tag="div" class="user-link">注册</router-link>
 				</div>
@@ -25,7 +26,7 @@
 			  	<van-cell title="我的订单" is-link />
 			  	<van-cell title="会员权益" is-link />
 			  	<van-cell title="联系我们" is-link />
-			  	<van-cell title="退出登陆" is-link />
+			  	<van-cell title="退出登陆" is-link @click="loginOut"/>
 			</van-cell-group>
 		</div>
 		
@@ -37,13 +38,21 @@
 	export default {
 		data(){
 			return {
-				avatar: avatar
+				avatar: avatar,
+				userinfo: {}
 			}
 		},
 		methods: {
 			goBack(){
 				this.$router.go(-1)
 			},
+			loginOut(){
+				sessionStorage.removeItem('USER')
+				this.$router.push('/login')
+			}
+		},
+		created(){
+			this.userinfo = JSON.parse(sessionStorage.getItem('USER'))
 		}
 	}
 </script>

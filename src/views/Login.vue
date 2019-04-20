@@ -64,7 +64,7 @@
 					if(result.data.code == 200){
 						
 						new Promise((resolve, reject) => {
-							sessionStorage.setItem('USER', this.userInfo.userName)
+							sessionStorage.setItem('USER', JSON.stringify(this.userInfo))
 							setTimeout(() => {
 								resolve()
 							},200)

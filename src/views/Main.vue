@@ -33,6 +33,11 @@
 		},
 		created(){
 			this.isActive()
+		},
+		watch: {
+			$route(){
+				this.isActive()
+			}
 		}
 	}
 </script>

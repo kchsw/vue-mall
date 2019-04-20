@@ -1,4 +1,5 @@
-const BASE_URL = "https://www.easy-mock.com/mock/5cb161a97aab7f78650d206c/shopmall/"
+// const BASE_URL = "https://www.easy-mock.com/mock/5cb161a97aab7f78650d206c/shopmall/"
+const BASE_URL = "https://www.easy-mock.com/mock/5cb9c65e544b7455dad94601/mall/"
 const LOCAL_URL = "http://localhost:3000/"
 
 const URL = {

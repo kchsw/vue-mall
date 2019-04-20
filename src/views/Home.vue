@@ -37,9 +37,11 @@
     			<slider :options="options" :items="recommend"></slider>
     		</div>
     	</div>
-    	<floor :floorData="floor1" :floorTitle="floorName.floor1"></floor>
-    	<floor :floorData="floor2" :floorTitle="floorName.floor2"></floor>
-    	<floor :floorData="floor3" :floorTitle="floorName.floor3"></floor>
+    	<template v-for="(floor,index) in floors">
+    		<floor :floorData="floor">{{index+1}}</floor>
+    	</template>	
+    	<!-- <floor :floorData="floor2" :floorTitle="floorName.floor2"></floor>
+    	<floor :floorData="floor3" :floorTitle="floorName.floor3"></floor> -->
     	<div class="hot-wrapper">
     		<div class="hot-title">热卖商品</div>
 			<div class="hot-goods">
@@ -82,10 +84,11 @@ export default {
   				slidesPerView: 3,
                 spaceBetween: 0,
   			},
-  			floor1: [],
-  			floor2: [],
-  			floor3: [],
-  			floorName: {},
+  			// floor1: [],
+  			// floor2: [],
+  			// floor3: [],
+  			// floorName: {},
+  			floors: {},
   			hotGoods: {},
   			loading: false,
       		finished: true
@@ -99,10 +102,7 @@ export default {
   				this.category = this.homeData.category
   				this.advertPic = this.homeData.advertesPicture.PICTURE_ADDRESS
   				this.recommend = this.homeData.recommend
-  				this.floor1 = this.homeData.floor1
-  				this.floor2 = this.homeData.floor2
-  				this.floor3 = this.homeData.floor3
-  				this.floorName = this.homeData.floorName
+  				this.floors = this.homeData.floors
   				this.hotGoods = this.homeData.hotGoods
   				// const { data: { data: homeData } } = result
   				// console.log(homeData)
@@ -144,9 +144,10 @@ export default {
 				border: none;
 				border-bottom: 1px solid #fff;
 				color: #fff;
+				font-size: 22px;
 				&::-webkit-input-placeholder{
 					color: #fff;
-					font-size: 24px;
+					font-size: 22px;
 				}
 			}
 		}
