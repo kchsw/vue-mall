@@ -74,6 +74,7 @@
 					if(result.data.code == 200){
 						Toast.success('注册成功')
 						this.openLoading = false
+						sessionStorage.setItem('USER', JSON.stringify(this.userInfo))
 						this.$router.push('/')
 					}else{
 						console.log(result.data.message)

@@ -54,7 +54,7 @@
 <script>
 	import { formatGoods } from "../api/goods.js"
 	import URL from "../api/serviceAPI"
-	import { Toast } from 'vant';
+	import { Toast } from 'vant'
 	export default {
 		data() {
 			return {

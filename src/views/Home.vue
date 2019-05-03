@@ -159,7 +159,7 @@ export default {
 		overflow: hidden;
 		width: 100%;
 		height: 0;
-		padding-bottom: 44.38%;
+		padding-bottom: 44.53%;
 		/deep/ .van-swipe__indicators{
 			bottom: 25px;
 		}

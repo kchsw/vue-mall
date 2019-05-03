@@ -57,10 +57,8 @@
 			},
 			clearCart(){
 				this.cartList = []
+				this.isEmpty = true
 				localStorage.removeItem('CARTLIST')
-			},
-			test(val,item){
-				console.log(val)
 			},
 			saveToLocal(){
 				localStorage.setItem('CARTLIST',JSON.stringify(this.cartList))
