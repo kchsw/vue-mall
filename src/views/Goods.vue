@@ -25,7 +25,11 @@
 			    	<div v-html="goodsInfo.DETAIL" class="detail-img">
 					</div>
 			    </van-tab>
-			    <van-tab title="评价">暂无评价</van-tab>
+			    <van-tab title="评价">
+			    	<div class="comment">
+			    		暂无评价
+			    	</div>
+				</van-tab>
 			</van-tabs>
 			
 		</div>
@@ -160,6 +164,11 @@
 			}
 			/deep/ .van-tab{
 				font-size: 24px;
+			}
+			.comment{
+				font-size: 24px;
+				margin-top: 20px;
+				text-align: center;
 			}
 		}
 	}

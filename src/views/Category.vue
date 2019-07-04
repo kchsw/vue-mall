@@ -159,9 +159,13 @@
 			this.getCategory(this.$route.query.categoryId)
 		},
 		watch: {
-			$route(){
-				this.active = this.$route.query.index || 0
-				this.getCategory(this.$route.query.categoryId)
+			$route(to, from){
+				if(to.name == 'category'){
+					this.active = this.$route.query.index || 0
+					this.getCategory(this.$route.query.categoryId)
+				}
+				// this.active = this.$route.query.index || 0
+				// this.getCategory(this.$route.query.categoryId)
 			}
 		}
 	}

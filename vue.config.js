@@ -4,6 +4,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+	publicPath: '/mall',
 	devServer: {
 		host: "0.0.0.0"
 	},
