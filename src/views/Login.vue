@@ -30,6 +30,7 @@
 			<div class="register-button">
 	            <van-button type="primary" size="large" :loading="openLoading" @click="loginAction">登陆</van-button>
 	        </div>
+	        <v-right/>
 		</div>
 	</div>
 </template>
@@ -37,6 +38,7 @@
 <script>
 	import URL from "../api/serviceAPI"
 	import { Toast } from 'vant';
+	import VRight from "@/components/VRight"
 	export default {
 		name: 'login',
 		data() {
@@ -52,7 +54,9 @@
         		passWordErrorMsg:'',
 			}
 		},
-		name: 'register',
+		components: {
+			VRight
+		},
 		methods: {
 			goBack(){
 				this.$router.go(-1)
@@ -128,7 +132,7 @@
 	}
 	.register-wrapper{
 		width: 80%;
-		margin: 55% auto;
+		margin: 45% auto;
 		padding: 20px;
 		background: #fff;
 		border-radius: 10px;

@@ -29,18 +29,23 @@
 			  	<van-cell title="退出登陆" is-link @click="loginOut"/>
 			</van-cell-group>
 		</div>
+		<v-right/>
 		
 	</div>
 </template>
 
 <script>
 	const avatar = require('../assets/timg.jpg')
+	import VRight from "@/components/VRight"
 	export default {
 		data(){
 			return {
 				avatar: avatar,
 				userinfo: {}
 			}
+		},
+		components: {
+			VRight
 		},
 		methods: {
 			goBack(){
